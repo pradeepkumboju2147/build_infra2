@@ -1,6 +1,8 @@
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.resource_group_location
+
+  tags = "local.common_tags"
 }
 
 resource "azurerm_app_service_plan" "app_service_plan" {
@@ -13,6 +15,8 @@ resource "azurerm_app_service_plan" "app_service_plan" {
     size = var.app_service_plan.size
   }
 
+  tags = "local.common_tags"
+
 }
 
 resource "azurerm_app_service" "app_service" {
@@ -20,5 +24,7 @@ resource "azurerm_app_service" "app_service" {
   location            = azurerm_app_service_plan.app_service_plan.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.app_service_plan.id
+
+  tags = "local.common_tags"
 
 }
